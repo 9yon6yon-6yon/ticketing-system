@@ -2,9 +2,9 @@ import { Controller, Post, Body, Put, Param, Delete, Get } from '@nestjs/common'
 import { BusService } from './bus.service';
 import { CreateBusDto, UpdateBusDto } from './dto/bus.dto';
 import { Bus } from 'src/models/bus.model';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
-
+@ApiTags('Bus API')
 @Controller('buses')
 export class BusController {
   constructor(private readonly busService: BusService) { }
