@@ -8,6 +8,6 @@ export class CreateLocationDto {
 
 export class UpdateLocationDto {
     @IsString()
-    @IsOptional()
-    name?: string;
+    @IsNotEmpty()
+    name: string;
 }

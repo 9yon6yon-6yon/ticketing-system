@@ -1,37 +1,112 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsEmail, IsOptional, IsNotEmpty } from 'class-validator';
 
 export class CreateUserDto {
+
   @IsString()
-  @IsNotEmpty()
-  name: string;
+  @IsNotEmpty() 
+  @ApiProperty({
+    name: 'name',
+    description: "Users name required",
+    type: String,
+    example: 'Jon Doe',
+  })
+
+  readonly name: string;
 
   @IsEmail()
   @IsNotEmpty()
-  email: string;
+  @ApiProperty({
+    name: 'email',
+    description: 'user\'s email address',
+    type: String,
+    example: 'johndoe@gmail.com',
+  })
+
+  readonly email: string;
 
   @IsString()
   @IsNotEmpty()
-  password: string;
+  @ApiProperty({
+    name: 'password',
+    description: "User's password",
+    type: String,
+    example: 'password1234',
+  })
+
+  readonly password: string;
 
   @IsString()
   @IsOptional()
-  phone?: string;
+  @ApiProperty({
+    name: 'phone',
+    description: "User's phone number || optional",
+    type: String,
+    example: '+880183xxxxxxx',
+  })
+
+  readonly phone?: string;
 }
 export class UpdateUserDto {
   @IsString()
   @IsOptional()
-  name?: string;
+  @ApiProperty({
+    name: 'name',
+    description: "Users name optional",
+    type: String,
+    example: 'Jon Doe',
+  })
+  readonly name?: string;
 
   @IsEmail()
   @IsOptional()
-  email?: string;
+  @ApiProperty({
+    name: 'email',
+    description: "Users email required",
+    type: String,
+    example: 'Jondoe@gmail.com',
+  })
+  readonly email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    name: 'password',
+    description: "Users password required",
+    type: String,
+    example: 'strong password',
+  })
+  readonly password: string;
 
   @IsString()
   @IsOptional()
-  password?: string;
-
-  @IsString()
-  @IsOptional()
-  phone?: string;
+  @ApiProperty({
+    name: 'phone',
+    description: "Users phone number optional",
+    type: String,
+    example: '+880198xxxxxx',
+  })
+  readonly phone?: string;
 }
+export class loginUserDTO{
 
+  @IsEmail()
+  @IsNotEmpty()
+  @ApiProperty({
+    name: 'email',
+    description: "Users email address required",
+    type: String,
+    example: 'Jon johndoe@gmail.com',
+  })
+  readonly email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    name: 'password',
+    description: "Users password required",
+    type: String,
+    example: 'Strongpassword',
+  })
+  readonly password: string;
+}

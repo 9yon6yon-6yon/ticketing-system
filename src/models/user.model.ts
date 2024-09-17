@@ -14,8 +14,7 @@ export class User {
     email: string;
 
     @Column({ type: 'varchar', length: 255 })
-    password: string;
-
+    password: string;    
     @Column({ type: 'varchar', length: 15, nullable: true })
     phone?: string;
 
@@ -27,11 +26,13 @@ export class User {
 
     @OneToMany(() => Ticket, (ticket) => ticket.user)
     tickets: Ticket[];
-  
 
-    constructor(email: string, password: string) {
+
+    constructor(name: string, email: string, password: string, phone?: string) {
+        this.name = name;
         this.email = email;
         this.password = password;
+        this.phone = phone;
     }
 
     async hashPassword() {

@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import * as bcrypt from 'bcrypt';
+import { CreateUserDto, loginUserDTO, UpdateUserDto } from './dto/user.dto';
 
 import { TicketService } from '../ticket/ticket.service';
 import { User } from 'src/models/user.model';
@@ -12,14 +13,23 @@ import { User } from 'src/models/user.model';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-    private readonly ticketService: TicketService, 
-  ) {}
+    private readonly userRepository: Repository<User>
+  ) { }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const { name, email, password, phone } = createUserDto;
+
     const user = this.userRepository.create(createUserDto);
-    await this.userRepository.save(user);
-    return user;
+    const newUser = new User(name, email, password, phone);
+    await newUser.hashPassword();
+
+    try {
+      await this.userRepository.save(newUser);
+      return newUser;
+    } catch (error) {
+      throw new BadRequestException('User with this email already exists.');
+    }
+
   }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
@@ -32,7 +42,24 @@ export class UserService {
   }
 
   async findOne(id: number): Promise<User> {
-    return this.userRepository.findOne({ where: { id } });
+    const user =  await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException(`User with id : ${id} was not found`);
+    }
+    return user;
+  }
+  async logInUser(loginDTO: loginUserDTO): Promise<boolean> {
+    const { email, password } = loginDTO;
+    if (!email || !password) {
+      throw new BadRequestException('Email and password must be provided');
+    }
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      throw new UnauthorizedException('Invalid credentials for user email or password');
+    }
+
+    return true;
   }
 
 }

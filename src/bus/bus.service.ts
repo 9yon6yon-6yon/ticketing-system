@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Bus } from 'src/models/bus.model';
 import { Repository } from 'typeorm';
@@ -29,5 +29,13 @@ export class BusService {
 
   async findOne(id: number): Promise<Bus> {
     return this.busRepository.findOne({ where: { id } });
+  }
+  
+  async findAll(): Promise<Bus[]> {
+    const buses = await this.busRepository.find();
+    if (buses.length === 0) {
+      throw new NotFoundException('No buses found in the database.');
+    }
+    return buses;
   }
 }
