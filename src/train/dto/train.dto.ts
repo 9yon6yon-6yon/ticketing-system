@@ -19,11 +19,11 @@ export class CreateTrainDto {
 
   @IsNumber()
   @IsNotEmpty()
-  from_location: number;
+ readonly from_location?: number; // References Location ID
 
   @IsNumber()
   @IsNotEmpty()
-  to_location: number;
+  readonly to_location?: number; // References Location ID
 }
 
 
@@ -45,10 +45,10 @@ export class UpdateTrainDto {
   arrival_time?: Date;
 
   @IsNumber()
-  @IsOptional()
-  from_location?: number;
+  @IsNotEmpty()
+  from_location?: number; // References Location ID
 
   @IsNumber()
-  @IsOptional()
-  to_location?: number;
+  @IsNotEmpty()
+  to_location?: number; // References Location ID
 }

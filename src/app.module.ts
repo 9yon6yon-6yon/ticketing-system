@@ -9,12 +9,13 @@ import { LocationModule } from './location/location.module';
 import DatabaseConnection from './database/connection';
 import { TicketModule } from './ticket/ticket.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
+import { SearchModule } from './search/search.module';
 @Module({
   imports: [ConfigModule.forRoot(), TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
     useFactory: DatabaseConnection,
     inject: [ConfigService],
-  }), UserModule, BusModule, TrainModule, SeatModule, LocationModule, TicketModule,
+  }), UserModule, BusModule, TrainModule, SeatModule, LocationModule, TicketModule, SearchModule,
 
 
 
