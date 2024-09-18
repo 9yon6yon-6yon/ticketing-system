@@ -19,11 +19,11 @@ export class CreateBusDto {
 
   @IsNumber()
   @IsNotEmpty()
-  from_location: number;
+  readonly fromlocation: number; // References Location ID
 
   @IsNumber()
   @IsNotEmpty()
-  to_location: number;
+  readonly tolocation: number; // References Location ID
 }
 
 
@@ -45,10 +45,10 @@ export class UpdateBusDto {
   arrival_time?: Date;
 
   @IsNumber()
-  @IsOptional()
-  from_location?: number;
+  @IsNotEmpty()
+  readonly fromlocation: number; // References Location ID
 
   @IsNumber()
-  @IsOptional()
-  to_location?: number;
+  @IsNotEmpty()
+ readonly tolocation: number; // References Location ID
 }

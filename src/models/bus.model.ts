@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, MongoCompatibilityError, ManyToOne, JoinColumn, JoinTable } from 'typeorm';
 import { Seat } from './seat.model';
-import { Ticket } from './ticket.model';
+import { Location } from './location.model';
 
 @Entity('buses')
 export class Bus {
@@ -8,32 +8,38 @@ export class Bus {
     readonly id?: number;
 
     @Column({ type: 'varchar', length: 100 })
-    bus_name: string;
+    readonly bus_name: string;
 
     @Column({ type: 'varchar', length: 50 })
-    type: string;
+    readonly type: string;
 
     @Column({ type: 'timestamp' })
-    departure_time: Date;
+    readonly departure_time: Date;
 
     @Column({ type: 'timestamp' })
-    arrival_time: Date;
-
-    @Column({ type: 'int' })
-    from_location: number;  // Foreign key to locations table
-
-    @Column({ type: 'int' })
-    to_location: number;    // Foreign key to locations table
+    readonly arrival_time: Date;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    created_at: Date;
+    readonly created_at: Date;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
-    updated_at: Date;
+    readonly updated_at: Date;
+
+    @Column({ name: 'from_location' })
+    readonly fromlocation: number;
+
+    @ManyToOne(() => Location, (location) => location.buses_from)
+    @JoinColumn({ name: 'from_location' })
+    readonly from_location: Location;
+    
+    @Column({ name: 'to_location' })
+    readonly tolocation: number;
+
+    @ManyToOne(() => Location, (location) => location.buses_to)
+    @JoinColumn({ name: 'to_location' })
+    readonly to_location: Location;
 
     @OneToMany(() => Seat, (seat) => seat.bus)
-    seats: Seat[];
+    readonly seats: Seat[];
 
-    @OneToMany(() => Ticket, (ticket) => ticket.bus)
-    tickets: Ticket[];
 }

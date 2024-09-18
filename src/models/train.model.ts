@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinColumn, ManyToOne, JoinTable } from 'typeorm';
 import { Seat } from './seat.model';
-import { Ticket } from './ticket.model';
+import { Location } from './location.model';
 
 @Entity('trains')
 export class Train {
@@ -8,32 +8,38 @@ export class Train {
     readonly id?: number;
 
     @Column({ type: 'varchar', length: 100 })
-    train_name: string;
+    readonly train_name: string;
 
     @Column({ type: 'varchar', length: 50 })
-    type: string; // e.g., Express, Local
+    readonly type: string; // e.g., Express, Local
 
     @Column({ type: 'timestamp' })
-    departure_time: Date;
+    readonly departure_time: Date;
 
     @Column({ type: 'timestamp' })
-    arrival_time: Date;
-
-    @Column({ type: 'int' })
-    from_location: number; // Foreign key to locations table
-
-    @Column({ type: 'int' })
-    to_location: number; // Foreign key to locations table
-
+    readonly arrival_time: Date;
+    
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    created_at: Date;
+    readonly created_at: Date;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
-    updated_at: Date;
+    readonly updated_at: Date;
 
-    @OneToMany(() => Seat, (seat) => seat.train)
-    seats: Seat[];
+    @OneToMany(() => Seat, (seat) => seat.bus)
+    readonly seats: Seat[];
 
-    @OneToMany(() => Ticket, (ticket) => ticket.train)
-    tickets: Ticket[];
+    @Column({ name: 'from_location' })
+    readonly fromlocation: number;
+
+    @ManyToOne(() => Location, (location) => location.trains_from)
+    @JoinColumn({ name: 'from_location' })
+    readonly from_location: Location;
+
+    @Column({ name: 'to_location' })
+    readonly tolocation: number;
+    
+    @ManyToOne(() => Location, (location) => location.trains_to)
+    @JoinColumn({ name: 'to_location' })
+    readonly to_location: Location;
+
 }

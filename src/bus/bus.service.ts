@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Bus } from 'src/models/bus.model';
-import { Repository } from 'typeorm';
+import { Between, DeepPartial, Repository } from 'typeorm';
 import { CreateBusDto, UpdateBusDto } from './dto/bus.dto';
 
 
@@ -10,7 +10,7 @@ export class BusService {
   constructor(
     @InjectRepository(Bus)
     private readonly busRepository: Repository<Bus>,
-  ) {}
+  ) { }
 
   async create(createBusDto: CreateBusDto): Promise<Bus> {
     const bus = this.busRepository.create(createBusDto);
@@ -30,12 +30,33 @@ export class BusService {
   async findOne(id: number): Promise<Bus> {
     return this.busRepository.findOne({ where: { id } });
   }
-  
+
   async findAll(): Promise<Bus[]> {
-    const buses = await this.busRepository.find();
+    const buses = await this.busRepository.find({
+      relations: ['from_location', 'to_location'],
+    });
     if (buses.length === 0) {
       throw new NotFoundException('No buses found in the database.');
     }
+    return buses;
+  }
+  async searchBuses({ from, to, date }: { from: number; to: number; date: string }): Promise<Bus[]> {
+    const searchDate = new Date(date);
+    searchDate.setHours(0, 0, 0, 0); // Set to start of the day
+
+    const nextDay = new Date(date);
+    nextDay.setHours(23, 59, 59, 999); // Set to end of the day
+
+
+    const buses = await this.busRepository.find({
+      where: {
+        from_location: { id: from },
+        to_location: { id: to },
+        departure_time: Between(searchDate, nextDay),
+      },
+      relations: ['from_location', 'to_location'],
+    });
+    console.log(from, to, searchDate, nextDay);
     return buses;
   }
 }

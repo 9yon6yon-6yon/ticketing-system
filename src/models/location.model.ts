@@ -1,30 +1,30 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm';
 import { Bus } from './bus.model';
 import { Train } from './train.model';
 
 @Entity('locations')
 export class Location {
     @PrimaryGeneratedColumn('increment', { name: 'id' })
-    readonly id?: number;
+    id: number;
 
     @Column({ type: 'varchar', length: 100 })
-    name: string;
+    readonly name: string;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
-    updated_at: Date;
+    readonly updated_at: Date;
 
-    @OneToMany(() => Bus, (bus) => bus.from_location)
-    buses_from: Bus[];
+    @OneToMany(() => Bus, (bus) => bus.from_location,{ eager: true, cascade: true })
+    readonly  buses_from: Bus;
 
-    @OneToMany(() => Bus, (bus) => bus.to_location)
-    buses_to: Bus[];
+    @OneToMany(() => Bus, (bus) => bus.to_location,{ eager: true, cascade: true })
+    readonly buses_to: Bus;
 
-    @OneToMany(() => Train, (train) => train.from_location)
-    trains_from: Train[];
+    @OneToMany(() => Train, (train) => train.from_location,{ eager: true, cascade: true })
+    readonly trains_from: Train;
 
-    @OneToMany(() => Train, (train) => train.to_location)
-    trains_to: Train[];
+    @OneToMany(() => Train, (train) => train.to_location,{ eager: true, cascade: true })
+    readonly trains_to: Train;
 }

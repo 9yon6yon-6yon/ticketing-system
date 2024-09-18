@@ -14,18 +14,18 @@ export class User {
     email: string;
 
     @Column({ type: 'varchar', length: 255 })
-    password: string;    
+    password: string;
     @Column({ type: 'varchar', length: 15, nullable: true })
     phone?: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    created_at?: Date;
+    readonly created_at?: Date;
 
     @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    updated_at?: Date;
+    readonly updated_at?: Date;
 
-    @OneToMany(() => Ticket, (ticket) => ticket.user)
-    tickets: Ticket[];
+    @OneToMany(() => Ticket, (ticket) => ticket.user, { eager: true, cascade: true })
+    readonly tickets: Ticket[];
 
 
     constructor(name: string, email: string, password: string, phone?: string) {

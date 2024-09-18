@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 import { Bus } from './bus.model';
 import { Ticket } from './ticket.model';
 import { Train } from './train.model';
@@ -7,24 +7,33 @@ import { Train } from './train.model';
 export class Seat {
     @PrimaryGeneratedColumn('increment', { name: 'id' })
     readonly id?: number;
+
+    @Column({ name: 'bus_id' })
+    busId: number;
+
     @ManyToOne(() => Bus, (bus) => bus.seats, { nullable: true })
-    bus: Bus;
+    @JoinColumn({ name: 'bus_id' })
+    readonly bus: Bus;
+
+    @Column({ name: 'train_id' })
+    trainId: number;
 
     @ManyToOne(() => Train, (train) => train.seats, { nullable: true })
-    train: Train;
+    @JoinColumn({ name: 'train_id' })
+    readonly train: Train;
 
     @Column({ type: 'varchar', length: 10 })
-    seat_number: string;
+    readonly seat_number: string;
 
     @Column({ type: 'boolean', default: true })
-    is_available: boolean;
+    readonly is_available: boolean;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    created_at: Date;
+    readonly created_at: Date;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
-    updated_at: Date;
+    readonly updated_at: Date;
 
-    @OneToMany(() => Ticket, (ticket) => ticket.seat)
-    tickets: Ticket[];
+    @OneToOne(() => Ticket, (ticket) => ticket.seat, { eager: true, cascade: true })
+    readonly tickets: Ticket[];
 }

@@ -19,11 +19,11 @@ export class CreateTrainDto {
 
   @IsNumber()
   @IsNotEmpty()
- readonly from_location?: number; // References Location ID
+ readonly fromlocation: number; // References Location ID
 
   @IsNumber()
   @IsNotEmpty()
-  readonly to_location?: number; // References Location ID
+  readonly tolocation: number; // References Location ID
 }
 
 
@@ -46,9 +46,9 @@ export class UpdateTrainDto {
 
   @IsNumber()
   @IsNotEmpty()
-  from_location?: number; // References Location ID
+  fromlocation?: number; // References Location ID
 
   @IsNumber()
   @IsNotEmpty()
-  to_location?: number; // References Location ID
+  tolocation?: number; // References Location ID
 }
