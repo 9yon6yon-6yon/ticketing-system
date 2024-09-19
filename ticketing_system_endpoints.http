@@ -141,17 +141,52 @@ DELETE http://localhost:3000/admin/bus/:bus_id HTTP/1.1
 ### 6. Additional Admin Actions
 
 #### 6.1. Add Seat
-POST http://localhost:3000/admin/seats/:bus_id HTTP/1.1
+POST http://localhost:3000/admin/seats HTTP/1.1
 Content-Type: application/json
 
 {
+  "busId": 2,
   "seat_number": "A1",
   "is_available": true
 }
+### update seat
+PUT http://localhost:3000/admin/seats/update/1 HTTP/1.1
+Content-Type: application/json
 
-#### 6.2. Remove Seat
-DELETE http://localhost:3000/admin/seats/:bus_id HTTP/1.1
+{
+  "seat_number": "B1",
+  "is_available": false
+}
 
+###deleteseat
+DELETE http://localhost:3000/admin/seats/delete/1 HTTP/1.1
+
+###fetch seat
+GET http://localhost:3000/seats/23 HTTP/1.1
+
+###fetch seat of a bus
+GET http://localhost:3000/seats/bus/1 HTTP/1.1
+###fetch seat of a bus
+GET http://localhost:3000/seats/bus/2 HTTP/1.1
+###fetch seat of a train
+GET http://localhost:3000/seats/train/1 HTTP/1.1
+
+### config
+PUT http://localhost:3000/admin/seats/update-config/2  HTTP/1.1
+Content-Type: application/json
+
+{
+  "seat_number": "A2",
+  "configuration": "2-2"
+}
+###add multiple seats for a bus
+POST http://localhost:3000/admin/seats/bus/add-seats/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "totalSeats": 48,
+  "configuration": "2-2"
+}
 
 ###Search for buses or trains based on location and time
 GET http://localhost:3000/search?from=9&to=11&date=2024-09-20

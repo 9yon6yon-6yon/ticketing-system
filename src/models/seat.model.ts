@@ -8,14 +8,14 @@ export class Seat {
     @PrimaryGeneratedColumn('increment', { name: 'id' })
     readonly id?: number;
 
-    @Column({ name: 'bus_id' })
+    @Column({ name: 'bus_id', nullable: true })
     busId: number;
 
     @ManyToOne(() => Bus, (bus) => bus.seats, { nullable: true })
     @JoinColumn({ name: 'bus_id' })
     readonly bus: Bus;
 
-    @Column({ name: 'train_id' })
+    @Column({ name: 'train_id', nullable: true })
     trainId: number;
 
     @ManyToOne(() => Train, (train) => train.seats, { nullable: true })

@@ -3,18 +3,18 @@ import { IsNumber, IsString, IsOptional, IsDecimal, IsEnum } from 'class-validat
 export class CreateTicketDto {
     @IsNumber()
     @IsOptional()
-    user_id?: number;
+    userId?: number;
 
     @IsNumber()
     @IsOptional()
-    bus_id?: number;
+    busId?: number;
 
     @IsNumber()
     @IsOptional()
-    train_id?: number;
+    trainId?: number;
 
     @IsNumber()
-    seat_id: number;
+    seatid: number;
 
     @IsDecimal()
     price: number;
@@ -27,36 +27,25 @@ export class CreateTicketDto {
     @IsOptional()
     payment_method?: string;
 
-    @IsString()
-    @IsOptional()
-    guest_name?: string;
-
-    @IsString()
-    @IsOptional()
-    guest_email?: string;
-
-    @IsString()
-    @IsOptional()
-    guest_phone?: string;
 }
 
 
 export class UpdateTicketDto {
     @IsNumber()
     @IsOptional()
-    user_id?: number;
+    userId?: number;
 
     @IsNumber()
     @IsOptional()
-    bus_id?: number;
+    busId?: number;
 
     @IsNumber()
     @IsOptional()
-    train_id?: number;
+    trainId?: number;
 
     @IsNumber()
     @IsOptional()
-    seat_id?: number;
+    seatid?: number;
 
     @IsDecimal()
     @IsOptional()
@@ -71,15 +60,4 @@ export class UpdateTicketDto {
     @IsOptional()
     payment_method?: string;
 
-    @IsString()
-    @IsOptional()
-    guest_name?: string;
-
-    @IsString()
-    @IsOptional()
-    guest_email?: string;
-
-    @IsString()
-    @IsOptional()
-    guest_phone?: string;
 }

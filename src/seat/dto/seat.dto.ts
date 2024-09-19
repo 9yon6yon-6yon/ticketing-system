@@ -3,11 +3,11 @@ import { IsString, IsNumber, IsBoolean, IsOptional, IsNotEmpty } from 'class-val
 export class CreateSeatDto {
   @IsNumber()
   @IsOptional()
-  bus_id?: number;
+  busId?: number;
 
   @IsNumber()
   @IsOptional()
-  train_id?: number;
+  trainId?: number;
 
   @IsString()
   @IsNotEmpty()
@@ -20,11 +20,11 @@ export class CreateSeatDto {
 export class UpdateSeatDto {
   @IsNumber()
   @IsOptional()
-  bus_id?: number;
+  busId?: number;
 
   @IsNumber()
   @IsOptional()
-  train_id?: number;
+  trainId?: number;
 
   @IsString()
   @IsOptional()
