@@ -13,6 +13,6 @@ import { TicketModule } from 'src/ticket/ticket.module';
   ],
   controllers: [UserController],
   providers: [UserService],
-  exports: [UserService], // Export UserService if it will be used in other modules
+  exports: [UserService,TypeOrmModule], // Export UserService if it will be used in other modules
 })
 export class UserModule {}
