@@ -98,7 +98,7 @@ export class SeatService {
 
   // Fetch all seats for a bus or train
   async findSeatsByBus(busId: number): Promise<Seat[]> {
-    const seats = await this.seatRepository.find({ where: { busId } });
+    const seats = await this.seatRepository.find({ where: { busId } , order: {seat_number: 'DESC'}});
     if (seats.length === 0) throw new NotFoundException(`No seats found for Bus ID ${busId}`);
     return seats;
   }

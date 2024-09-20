@@ -9,6 +9,7 @@ import { Train } from 'src/models/train.model';
 @Module({
   imports: [TypeOrmModule.forFeature([Seat,Bus,Train])],
   controllers: [SeatController],
-  providers: [SeatService]
+  providers: [SeatService],
+  exports: [SeatService]
 })
 export class SeatModule {}

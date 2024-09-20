@@ -26,7 +26,7 @@ export class Seat {
     readonly seat_number: string;
 
     @Column({ type: 'boolean', default: true })
-    readonly is_available: boolean;
+    is_available: boolean;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     readonly created_at: Date;
