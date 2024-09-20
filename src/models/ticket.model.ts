@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { User } from './user.model';
-import { Bus } from './bus.model';
 import { Seat } from './seat.model';
-import { Train } from './train.model';
+import { Payment } from './payment.model';
 
 
 @Entity('tickets')
@@ -32,6 +31,9 @@ export class Ticket {
 
     @Column({ type: 'varchar', length: 50, nullable: true })
     payment_method: string;
+
+    @OneToOne(() => Payment, (payment) => payment.ticket, { cascade: true })  // One ticket has one payment
+    payment: Payment; 
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     booking_time: Date;

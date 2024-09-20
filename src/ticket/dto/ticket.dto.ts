@@ -1,8 +1,8 @@
-import { IsNumber, IsString, IsOptional, IsDecimal, IsEnum } from 'class-validator';
+import { IsNumber, IsString, IsOptional, IsDecimal, IsEnum, IsNotEmpty } from 'class-validator';
 
 export class CreateTicketDto {
     @IsNumber()
-    @IsOptional()
+    @IsNotEmpty()
     userId?: number;
 
     @IsNumber()
@@ -14,9 +14,11 @@ export class CreateTicketDto {
     trainId?: number;
 
     @IsNumber()
+    @IsNotEmpty()
     seatid: number;
 
-    @IsDecimal()
+    @IsNumber()
+    @IsNotEmpty()
     price: number;
 
     @IsString()
