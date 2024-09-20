@@ -34,6 +34,7 @@ export class BusService {
   async findAll(): Promise<Bus[]> {
     const buses = await this.busRepository.find({
       relations: ['from_location', 'to_location'],
+      order: {departure_time: 'ASC'},
     });
     if (buses.length === 0) {
       throw new NotFoundException('No buses found in the database.');
