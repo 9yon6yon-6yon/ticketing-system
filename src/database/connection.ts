@@ -2,6 +2,7 @@ import { ConfigService } from "@nestjs/config";
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { Bus } from "src/models/bus.model";
 import { Location } from "src/models/location.model";
+import { Payment } from "src/models/payment.model";
 import { Seat } from "src/models/seat.model";
 import { Ticket } from "src/models/ticket.model";
 import { Train } from "src/models/train.model";
@@ -16,7 +17,7 @@ export default (configService: ConfigService): TypeOrmModuleOptions => {
     username: configService.get('DB_USER'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_DATABASE'),
-    entities: [User,Bus,Train,Ticket,Seat,Location],
+    entities: [User,Bus,Train,Ticket,Seat,Location,Payment],
     synchronize: true,
 
   }
