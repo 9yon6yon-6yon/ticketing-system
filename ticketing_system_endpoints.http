@@ -145,7 +145,7 @@ POST http://localhost:3000/admin/seats HTTP/1.1
 Content-Type: application/json
 
 {
-  "busId": 2,
+  "busId": 3,
   "seat_number": "A1",
   "is_available": true
 }
@@ -180,7 +180,7 @@ Content-Type: application/json
   "configuration": "2-2"
 }
 ###add multiple seats for a bus
-POST http://localhost:3000/admin/seats/bus/add-seats/1 HTTP/1.1
+POST http://localhost:3000/admin/seats/bus/add-seats/4 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -199,3 +199,44 @@ GET http://localhost:3000/search?from=9&to=14&date=2024-09-20
 GET http://localhost:3000/search?from=1&to=9&date=2024-09-20
 ###Search for buses or trains based on location and time
 GET http://localhost:3000/search?from=11&to=19&date=2024-09-20
+
+
+
+### Get All Seats for a Bus (GET /seats/bus/:busId)
+GET http://localhost:3000/seats/bus/4
+
+### Get All Seats for a Train (GET /seats/train/:trainId)
+GET http://localhost:3000/seats/train/1
+
+### Add Multiple Seats to a Bus (POST /admin/seats/bus/:busId/add-seats)
+### Book a Seat and Generate Ticket (POST /tickets/create)
+POST http://localhost:3000/ticket/create
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "busId": 4,
+  "seatid": 1,
+  "price": 50,
+  "status": "confirmed",
+  "payment_method": "credit_card"
+}
+
+### Process Payment for a Ticket (POST /payment)
+POST http://localhost:3000/payment/create
+Content-Type: application/json
+
+{
+  "stripePaymentId": "pm_1Q0PsIJvEtkwdCNYMSaVuRz6",
+  "amount": 5000, 
+  "currency": "usd",
+  "status": "succeeded",
+  "userId": 1,
+  "ticketId": 1
+}
+
+### Get All Tickets for a User (GET /tickets/user/:userId)
+GET http://localhost:3000/payment/history/1
+
+### Get Details of a Ticket (GET /tickets/:id)
+GET http://localhost:3000/ticket/1
