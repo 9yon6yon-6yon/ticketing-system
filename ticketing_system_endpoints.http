@@ -216,10 +216,10 @@ Content-Type: application/json
 {
   "userId": 1,
   "busId": 4,
-  "seatid": 1,
+  "seatid": 4,
   "price": 50,
   "status": "confirmed",
-  "payment_method": "credit_card"
+  "payment_method": "pm_test_visa"
 }
 
 ### Process Payment for a Ticket (POST /payment)
@@ -227,12 +227,11 @@ POST http://localhost:3000/payment/create
 Content-Type: application/json
 
 {
-  "stripePaymentId": "pm_1Q0PsIJvEtkwdCNYMSaVuRz6",
-  "amount": 5000, 
+  "amount": 500, 
   "currency": "usd",
   "status": "succeeded",
   "userId": 1,
-  "ticketId": 1
+  "ticketId": 15
 }
 
 ### Get All Tickets for a User (GET /tickets/user/:userId)
