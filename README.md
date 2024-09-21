@@ -29,8 +29,8 @@ This project is a NestJS backend for a ticketing system that includes user manag
 
 1. **Clone the Repository**
     ```bash
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone https://github.com/9yon6yon-6yon/ticketing-system.git
+    cd ticketing-system
     ```
 2. **Install Dependencies**
     ```bash
