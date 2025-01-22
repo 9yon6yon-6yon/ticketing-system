@@ -51,7 +51,7 @@ Create a `.env` ( e.g. a `.env.example` is given which can be modified ) file at
 Make sure the database is correctly set up by running migrations:
 
     ```bash
-    npm run typeorm migration:run
+    npm run migration:up
     ```
 5. **Start the Development Server**
     ```bash
