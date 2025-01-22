@@ -38,6 +38,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "stripe": "^16.12.0",
+    "ticketing-system": "file:",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
