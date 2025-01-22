@@ -7,7 +7,7 @@ import { Seat } from "src/models/seat.model";
 import { Ticket } from "src/models/ticket.model";
 import { Train } from "src/models/train.model";
 import { User } from "src/models/user.model";
-
+import * as fs from 'fs';
 
 export default (configService: ConfigService): TypeOrmModuleOptions => {
   const options: TypeOrmModuleOptions = {
@@ -17,6 +17,9 @@ export default (configService: ConfigService): TypeOrmModuleOptions => {
     username: configService.get('DB_USER'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_DATABASE'),
+    ssl: {
+      ca: fs.readFileSync(configService.get('CA_CERT_PATH')).toString(),
+  },
     entities: [User,Bus,Train,Ticket,Seat,Location,Payment],
     synchronize: true,
 
