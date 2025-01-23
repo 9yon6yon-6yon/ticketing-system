@@ -18,7 +18,7 @@ export default (configService: ConfigService): TypeOrmModuleOptions => {
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_DATABASE'),
     ssl: {
-      ca: fs.readFileSync(configService.get('CA_CERT_PATH')).toString(),
+      ca: configService.get('CA_CERT_PATH'),
   },
     entities: [User,Bus,Train,Ticket,Seat,Location,Payment],
     synchronize: true,
