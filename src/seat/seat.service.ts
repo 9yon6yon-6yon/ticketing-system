@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Seat } from 'src/models/seat.model';
+import { Seat } from '../models/seat.model';
 import { Repository } from 'typeorm';
 import { CreateSeatDto, UpdateSeatDto } from './dto/seat.dto';
-import { Bus } from 'src/models/bus.model';
-import { Train } from 'src/models/train.model';
+import { Bus } from '../models/bus.model';
+import { Train } from '../models/train.model';
 
 
 @Injectable()
