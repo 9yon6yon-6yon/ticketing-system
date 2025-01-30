@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Train } from 'src/models/train.model';
+import { Train } from '../models/train.model';
 import { Between, Repository } from 'typeorm';
 import { CreateTrainDto, UpdateTrainDto } from './dto/train.dto';
-import { SearchDto } from 'src/search/dto/search.dto';
+import { SearchDto } from '../search/dto/search.dto';
 
 @Injectable()
 export class TrainService {
