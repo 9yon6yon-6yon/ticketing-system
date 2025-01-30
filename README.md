@@ -130,4 +130,4 @@ npm run start:prod
 **Database Connection Errors:** Ensure your PostgreSQL database is running and your `.env` file contains the correct credentials.\
 **Stripe Errors:** Ensure that your Stripe API keys are correctly configured in the `.env` file.
 ## Conclusion
-You now have your backend server running with a ticketing system API. The routes for users, tickets, buses, trains, and seats are all ready to be consumed by a frontend.
+You now have your backend server running with a ticketing system API. The routes for users, tickets, buses, trains, and seats are all ready to be consumed by a frontend. Tried deployment with vercel.
