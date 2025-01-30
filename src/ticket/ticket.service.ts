@@ -1,14 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Ticket } from 'src/models/ticket.model';
+import { Ticket } from '../models/ticket.model';
 import { Repository } from 'typeorm';
 import { CreateTicketDto } from './dto/ticket.dto';
-import { User } from 'src/models/user.model';
-import { Seat } from 'src/models/seat.model';
-import { Payment } from 'src/models/payment.model';
-import { PaymentService } from 'src/payment/payment.service';
-import { Bus } from 'src/models/bus.model';
-import { CreatePaymentDto } from 'src/payment/dto/payment.dto';
+import { User } from '../models/user.model';
+import { Seat } from '../models/seat.model';
+import { Payment } from '../models/payment.model';
+import { PaymentService } from '../payment/payment.service';
+import { Bus } from '../models/bus.model';
+import { CreatePaymentDto } from '../payment/dto/payment.dto';
 
 
 @Injectable()
