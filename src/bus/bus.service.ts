@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Bus } from 'src/models/bus.model';
+import { Bus } from '../models/bus.model';
 import { Between, DeepPartial, Repository } from 'typeorm';
 import { CreateBusDto, UpdateBusDto } from './dto/bus.dto';
 
