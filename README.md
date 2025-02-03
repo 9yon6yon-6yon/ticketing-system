@@ -45,6 +45,8 @@ Create a `.env` ( e.g. a `.env.example` is given which can be modified ) file at
     DATABASE_USERNAME=yourusername
     DATABASE_PASSWORD=yourpassword
     DATABASE_NAME=ticketing
+    DB_SCHEMA=public
+    CA_CERT_PATH=""
     STRIPE_SECRET_KEY=your_stripe_secret_key
     ```
 4. **Run Database Migrations**
