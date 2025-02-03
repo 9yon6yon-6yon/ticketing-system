@@ -4,7 +4,7 @@ import { IsString, IsEmail, IsOptional, IsNotEmpty } from 'class-validator';
 export class CreateUserDto {
 
   @IsString()
-  @IsNotEmpty() 
+  @IsNotEmpty()
   @ApiProperty({
     name: 'name',
     description: "Users name required",
@@ -88,7 +88,7 @@ export class UpdateUserDto {
   })
   readonly phone?: string;
 }
-export class loginUserDTO{
+export class loginUserDTO {
 
   @IsEmail()
   @IsNotEmpty()
