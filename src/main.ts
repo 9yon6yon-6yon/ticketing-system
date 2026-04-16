@@ -31,7 +31,15 @@ async function createApp() {
 }
 
 export default async function handler(req, res) {
-  const app = await createApp();
-  const server = app.getHttpAdapter().getInstance();
-  return server(req, res);
+  try {
+    const app = await createApp();
+    const server = app.getHttpAdapter().getInstance();
+    return server(req, res);
+  } catch (err) {
+    console.error('🔥 RUNTIME ERROR:', err);
+    res.status(500).json({
+      error: err.message,
+      stack: err.stack,
+    });
+  }
 }
