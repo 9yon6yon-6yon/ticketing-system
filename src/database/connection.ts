@@ -25,6 +25,7 @@ import { User } from 'src/models/user.model';
 // };
 export default (configService: ConfigService): TypeOrmModuleOptions => {
   const dbURI = configService.get<string>('DB_URI');
+  console.log('DB_URI:', configService.get('DB_URI'));
   if (dbURI) {
     return {
       type: 'postgres',
