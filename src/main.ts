@@ -5,14 +5,33 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 class APIDocument {
   static setup(app: INestApplication) {
-    const options = new DocumentBuilder().setTitle('Ticket System API').setDescription('This application exposes the backend APIs for the Ticketing System').build();
-    const document = SwaggerModule.createDocument(app, options, { ignoreGlobalPrefix: true })
+    const options = new DocumentBuilder()
+      .setTitle('Ticket System API')
+      .setDescription('This application exposes the backend APIs for the Ticketing System')
+      .build();
+    const document = SwaggerModule.createDocument(app, options, {
+      ignoreGlobalPrefix: true,
+    });
+
     SwaggerModule.setup('API', app, document);
   }
 }
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
-  APIDocument.setup(app);
-  await app.listen(3000);
+
+let app: INestApplication;
+
+async function createApp() {
+  if (!app) {
+    app = await NestFactory.create(AppModule, { cors: true });
+
+    APIDocument.setup(app);
+
+    await app.init();
+  }
+  return app;
 }
-bootstrap();
+
+export default async function handler(req, res) {
+  const app = await createApp();
+  const server = app.getHttpAdapter().getInstance();
+  return server(req, res);
+}
