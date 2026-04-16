@@ -16,9 +16,7 @@ export default (configService: ConfigService): TypeOrmModuleOptions => {
     username: configService.get('DB_USER'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_DATABASE'),
-    // ssl: {
-    //   ca: configService.get('CA_CERT'),
-    // },
+    ssl: { rejectUnauthorized: false },
     entities: [User, Bus, Train, Ticket, Seat, Location, Payment],
     synchronize: true,
   };
