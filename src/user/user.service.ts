@@ -10,7 +10,7 @@ import * as bcrypt from 'bcrypt';
 import { CreateUserDto, loginUserDTO, UpdateUserDto } from './dto/user.dto';
 
 import { TicketService } from '../ticket/ticket.service';
-import { User } from 'src/models/user.model';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class UserService {
